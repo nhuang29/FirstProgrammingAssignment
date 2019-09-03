@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 for (int x = 0; x <= 9; x++) {
                     String str = localTracker[x];
                     if (!(str == null) && str.equals(namer)) {
+                        // this is to stop everything.
                         msgUser.setText("Thank you, but this user is already registered.");
                         return;
                     }
