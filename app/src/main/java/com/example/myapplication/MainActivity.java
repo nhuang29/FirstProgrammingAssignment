@@ -51,13 +51,14 @@ public class MainActivity extends AppCompatActivity {
         infoEnter.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
 
+                //hi
                 String namer = names.getText().toString(); // name of user
                 // piece of code to check if the users name is already registered
                 for (int x = 0; x <= 9; x++) {
                     String str = localTracker[x];
                     if (!(str == null) && str.equals(namer)) {
                         // this is to stop everything.
-                        msgUser.setText("Thank you, but this user is already registered.");
+                        msgUser.setText("Error: Thank you, but this user is already registered.");
                         return;
                     }
                 }
