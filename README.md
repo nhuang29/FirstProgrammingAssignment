@@ -9,3 +9,4 @@ Instructions of how to use/test project:
 5.) Press the button at the bottom to enter in your name into the firebase database
 6.) If the messsage "Thank you, but this user is already registered" appears, that means that there is already a user with the name in the database
 7.) Once you have registered 10 unique names, any new name inputted after this will override the database list from the beginning
+ 
