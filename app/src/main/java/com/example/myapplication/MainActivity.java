@@ -5,15 +5,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
+    private int tracker = 0; // to keep track of users
+    private String[] localTracker = new String[10];
+
+    private FirebaseDatabase mref = FirebaseDatabase.getInstance("https://myapplication2-26c3e.firebaseio.com/");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -33,14 +41,33 @@ public class MainActivity extends AppCompatActivity {
 
         // All my own inputted code
         final TextView msgUser = findViewById(R.id.MessageToUser);
+        final EditText names = findViewById(R.id.NameOfPerson);
 
-        // Added In Comment to show that GitHub update works...
+
+        // Added In Comment to show that GitHub update works
 
         // This is to enter a person's name into the database
         final Button infoEnter = findViewById(R.id.SubmitButton);
         infoEnter.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
+
+                String namer = names.getText().toString(); // name of user
+                // piece of code to check if the users name is already registered
+                for (int x = 0; x <= 9; x++) {
+                    String str = localTracker[x];
+                    if (!(str == null) && str.equals(namer)) {
+                        msgUser.setText("Thank you, but this user is already registered.");
+                        return;
+                    }
+                }
                 msgUser.setText("Thank you for submitting your name!");
+                localTracker[tracker] = namer;
+                DatabaseReference myself = mref.getReference("Name" + tracker);
+                myself.setValue(namer); // set to name value
+                tracker++;
+                if (tracker > 9) {
+                    tracker = 0;
+                }
             }
         });
     }
