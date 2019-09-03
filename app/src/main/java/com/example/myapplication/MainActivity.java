@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         // All my own inputted code
         final TextView msgUser = findViewById(R.id.MessageToUser);
 
+        // Added In Comment to show that GitHub update works...
+
         // This is to enter a person's name into the database
         final Button infoEnter = findViewById(R.id.SubmitButton);
         infoEnter.setOnClickListener(new View.OnClickListener(){
